@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="phero phero--split">
+  <div class="container phero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Conteúdos</span></nav>
+      {{ m.eyebrow('Conteúdo dermatológico') }}
+      <h1 class="phero__title" data-split>Informação que <em>cuida</em></h1>
+    </div>
+    <div class="phero__side" data-reveal>
+      <p class="lead">Orientações sobre cuidados com a pele, saúde capilar, prevenção e tratamentos, escritas pela Dra. Karinie Marinho — para você tomar decisões com mais segurança.</p>
+    </div>
+  </div>
+</section>
+
+<section class="blog" data-blog>
+  <div class="container">
+    <div class="blog__filters" role="tablist" aria-label="Categorias">
+      <button class="chip is-active" type="button" data-cat="todos">Todos</button>
+      {% for c in CATEGORIAS %}<button class="chip" type="button" data-cat="{{ c }}">{{ c }}</button>{% endfor %}
+    </div>
+
+    {% set f = ARTIGOS[0] %}
+    <article class="feature" data-cat="{{ f.categoria }}" data-reveal>
+      <a class="feature__link" href="{{ root }}conteudos/{{ f.slug }}.html" data-cursor="Ler">
+        <div class="feature__media">{{ img(f.img, '', '', '(max-width: 900px) 92vw, 55vw') }}</div>
+        <div class="feature__body">
+          <p class="acard__meta"><span class="chip chip--sm">{{ f.categoria }}</span><span>{{ f.leitura }} min de leitura</span><span>{{ f.data }}</span></p>
+          <h2 class="feature__title">{{ f.titulo }}</h2>
+          <p class="muted">{{ f.resumo }}</p>
+          <span class="link-arrow">Ler artigo {{ m.icon('arrow') }}</span>
+        </div>
+      </a>
+    </article>
+
+    <div class="cards-3 blog__grid">
+      {% for a in ARTIGOS[1:] %}<div class="blog__cell" data-cat="{{ a.categoria }}" data-reveal style="--delay: {{ (loop.index0 % 3) * 100 }}ms">{{ m.art_card(a) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section insta">
+  <div class="container insta__in">
+    <div class="insta__copy">
+      {{ m.eyebrow('Instagram') }}
+      <h2 class="h2" data-split>Mais conteúdo no <em>@{{ S.INSTAGRAM }}</em></h2>
+      <p class="muted" data-reveal>Dicas de cuidados, bastidores da clínica e respostas para as dúvidas mais comuns — toda semana.</p>
+      <div data-reveal>{{ m.btn(S.INSTAGRAM_URL, 'Seguir no Instagram', 'dark', 'instagram', 'target="_blank" rel="noopener"') }}</div>
+    </div>
+    <div class="insta__grid">
+      {% for name in ['labios', 'olhos', 'colageno-3d', 'peeling-quimico'] %}
+      <a class="insta__item" href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener" data-cursor="Instagram" data-reveal style="--delay: {{ loop.index0 * 90 }}ms">
+        {{ img(name, '', '', '(max-width: 640px) 46vw, 20vw') }}
+        <span class="insta__ico">{{ m.icon('instagram') }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band() }}
+{% endblock %}

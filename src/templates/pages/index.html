@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+
+{# ============================================================ HERO #}
+<section class="hero" data-hero>
+  <div class="hero__deco" aria-hidden="true">{% include 'svg/mark.svg' %}</div>
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      {{ m.eyebrow('Dermatologia · Medicina personalizada · Brasília') }}
+      <h1 class="hero__title" data-split>A sua pele é <em>um espelho</em> da sua saúde.</h1>
+      <p class="hero__lead" data-reveal>Na Vinovare, a Dra. Karinie Marinho une avaliação médica integral, tecnologia avançada e protocolos individualizados para cuidar da sua pele, do seu cabelo e do seu corpo — com naturalidade e segurança.</p>
+      <div class="hero__actions" data-reveal>
+        {{ m.btn(wa(), 'Agendar avaliação', 'dark', 'whatsapp', 'target="_blank" rel="noopener"') }}
+        <a class="link-circle" href="{{ root }}descubra.html">
+          <span class="link-circle__c">{{ m.icon('arrow') }}</span>
+          <span>Descubra seu cuidado</span>
+        </a>
+      </div>
+      <ul class="hero__facts" data-reveal>
+        <li><strong><span data-count="20">20</span>+</strong><span>tratamentos faciais, corporais e capilares</span></li>
+        <li><strong>3</strong><span>áreas de cuidado: rosto, corpo e cabelo</span></li>
+        <li><strong>1:1</strong><span>todos os procedimentos com a própria Dra. Karinie</span></li>
+      </ul>
+    </div>
+
+    <div class="hero__visual" data-hero-visual>
+      <div class="hero__arch" aria-hidden="true">
+        <span class="hero__arch-glow"></span>
+      </div>
+      <svg class="hero__ring" viewBox="0 0 500 500" aria-hidden="true">
+        <path d="M250 15a235 235 0 1 1-166 69" />
+      </svg>
+      <div class="hero__dra" data-depth="0.6">
+        {{ img('dra-apresentando', 'Dra. Karinie Marinho, médica dermatologista, apresentando a clínica', 'hero__dra-img', '(max-width: 900px) 92vw, 46vw', eager=True) }}
+      </div>
+      <div class="hero__badge hero__badge--name" data-depth="1.4">
+        <span class="hero__badge-mark">{% include 'svg/mark.svg' %}</span>
+        <span><strong>Dra. Karinie Marinho</strong><small>Dermatologista · {{ S.CRM }} · {{ S.RQE }}</small></span>
+      </div>
+      <button class="hero__video" type="button" data-video="{{ root }}assets/video/recepcao-tour.mp4" data-cursor="Assistir" data-depth="1.1" aria-label="Assistir ao tour pela clínica">
+        <video muted loop playsinline autoplay preload="metadata" poster="{{ root }}assets/video/recepcao-tour-poster.webp">
+          <source src="{{ root }}assets/video/recepcao-tour.mp4" type="video/mp4">
+        </video>
+        <span class="hero__video-label"><span class="hero__video-play">{{ m.icon('play') }}</span>Tour pela clínica</span>
+      </button>
+    </div>
+  </div>
+  <a class="hero__scroll" href="#manifesto" aria-label="Rolar para o conteúdo"><span>Role para descobrir</span><i></i></a>
+</section>
+
+{# ============================================================ MARQUEE #}
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {% for _ in range(2) %}
+    <div class="marquee__group">
+      {% for w in ['Rejuvenescimento', 'Saúde da pele', 'Medicina capilar', 'Contorno corporal', 'Lasers', 'Bioestimuladores', 'Prevenção', 'Autoestima'] %}
+      <span>{{ w }}</span><i class="marquee__mark">{% include 'svg/mark.svg' %}</i>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{# ============================================================ MANIFESTO #}
+<section class="manifesto section" id="manifesto">
+  <div class="container">
+    {{ m.eyebrow('Medicina personalizada') }}
+    <p class="manifesto__text" data-words>
+      Na Vinovare, todo cuidado começa
+      <span class="pill-img">{{ img('rosto-retrato', '', '', '120px') }}</span>
+      por você: uma avaliação médica integral, tecnologia de ponta
+      <span class="pill-img">{{ img('laser-lavieen', '', '', '120px') }}</span>
+      e um plano feito sob medida para a sua pele, o seu cabelo
+      <span class="pill-img">{{ img('cabelo-macro', '', '', '120px') }}</span>
+      e o seu bem-estar.
+    </p>
+    <div class="diffs">
+      {% for ico, t, d in S.DIFERENCIAIS %}
+      <div class="diff" data-reveal style="--delay: {{ loop.index0 * 90 }}ms">
+        <span class="diff__ico">{{ m.icon(ico) }}</span>
+        <h3 class="diff__title">{{ t }}</h3>
+        <p>{{ d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================================================ ÁREAS #}
+<section class="areas-sec section" id="areas">
+  <div class="container split-head">
+    <div>
+      {{ m.eyebrow('Navegue por área') }}
+      <h2 class="h2" data-split>Onde você quer <em>começar?</em></h2>
+    </div>
+    <p class="split-head__p" data-reveal>Escolha uma área para descobrir os tratamentos disponíveis. Cada protocolo é montado a partir da sua avaliação — aqui você conhece as possibilidades.</p>
+  </div>
+  <div class="areas" data-areas>
+    {% for akey, area in AREAS.items() %}
+    <article class="area" data-area="{{ akey }}">
+      <div class="area__media">{{ img(area.img, '', 'area__img', '(max-width: 900px) 100vw, 70vw') }}</div>
+      <button class="area__trigger" type="button" aria-expanded="false" aria-controls="area-{{ akey }}" data-cursor="Explorar">
+        <span class="area__num">0{{ loop.index }}</span>
+        <span class="area__name">{{ area.nome }}</span>
+        <span class="area__plus">{{ m.icon('plus') }}</span>
+      </button>
+      <div class="area__panel" id="area-{{ akey }}">
+        <p class="area__slogan">{{ area.slogan }}</p>
+        <h3 class="area__title">{{ area.titulo }}</h3>
+        <p class="area__text">{{ area.texto }}</p>
+        <ul class="area__chips">
+          {% for p in procs(PROTOCOLOS_AREA[akey]) %}
+          <li><a href="{{ root }}procedimentos/{{ p.slug }}.html">{{ p.nome }}</a></li>
+          {% endfor %}
+        </ul>
+        {{ m.btn(root ~ 'tratamentos.html#' ~ akey, 'Ver tratamentos de ' ~ area.nome|lower, 'light') }}
+      </div>
+      <button class="area__close" type="button" aria-label="Fechar {{ area.nome }}">{{ m.icon('close') }}</button>
+    </article>
+    {% endfor %}
+    <article class="area area--quiz" data-area="descubra">
+      <div class="area__media">{{ img('seda-fundo', '', 'area__img', '(max-width: 900px) 100vw, 70vw') }}</div>
+      <button class="area__trigger" type="button" aria-expanded="false" aria-controls="area-descubra" data-cursor="Explorar">
+        <span class="area__num">04</span>
+        <span class="area__name">Descubra seu cuidado</span>
+        <span class="area__plus">{{ m.icon('plus') }}</span>
+      </button>
+      <div class="area__panel" id="area-descubra">
+        <p class="area__slogan">Experiência interativa</p>
+        <h3 class="area__title">Ainda não sabe por onde começar?</h3>
+        <p class="area__text">Responda a quatro perguntas rápidas sobre seus interesses e receba conteúdos e tratamentos para conhecer antes da sua avaliação. Leva menos de um minuto — e não substitui a consulta.</p>
+        {{ m.btn(root ~ 'descubra.html', 'Começar agora', 'light') }}
+      </div>
+      <button class="area__close" type="button" aria-label="Fechar">{{ m.icon('close') }}</button>
+    </article>
+  </div>
+</section>
+
+{# ============================================================ DESTAQUES #}
+<section class="feat section" data-carousel>
+  <div class="container split-head">
+    <div>
+      {{ m.eyebrow('Procedimentos') }}
+      <h2 class="h2" data-split>Tratamentos <em>em destaque</em></h2>
+    </div>
+    <div class="feat__ctrl" data-reveal>
+      <button class="round-btn" type="button" data-carousel-prev aria-label="Anterior">{{ m.icon('arrow-left') }}</button>
+      <button class="round-btn" type="button" data-carousel-next aria-label="Próximo">{{ m.icon('arrow') }}</button>
+      <a class="link-arrow" href="{{ root }}tratamentos.html">Ver todos {{ m.icon('arrow') }}</a>
+    </div>
+  </div>
+  <div class="feat__track" data-carousel-track>
+    {% for p in procs(DESTAQUES) %}{{ m.proc_card(p, 'feat__card') }}{% endfor %}
+    <a class="feat__all" href="{{ root }}tratamentos.html" data-cursor="Ver">
+      <span class="feat__all-c">{{ m.icon('arrow-up') }}</span>
+      <strong>Ver todos os {{ PROCEDIMENTOS|length }} tratamentos</strong>
+      <small>Rosto, corpo e cabelo</small>
+    </a>
+  </div>
+  <div class="container"><div class="feat__progress"><span data-carousel-progress></span></div></div>
+</section>
+
+{# ============================================================ SOBRE #}
+<section class="about section">
+  <div class="container about__grid">
+    <div class="about__visual" data-reveal>
+      <div class="about__arch">
+        {{ img('dra-retrato', 'Retrato da Dra. Karinie Marinho', 'about__img', '(max-width: 900px) 90vw, 40vw') }}
+      </div>
+      <div class="badge-rotate" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="badge-rotate__txt">
+          <defs><path id="circ-home" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circ-home">DERMATOLOGIA · MEDICINA PERSONALIZADA · VINOVARE ·</textPath></text>
+        </svg>
+        <span class="badge-rotate__mark">{% include 'svg/mark.svg' %}</span>
+      </div>
+      <div class="about__card" data-depth="1">
+        <small>Graduação em Medicina</small>
+        <strong>Universidade Federal de Goiás</strong>
+      </div>
+    </div>
+    <div class="about__copy">
+      {{ m.eyebrow('Conheça a especialista') }}
+      <h2 class="h2" data-split>Dra. Karinie <em>Marinho</em></h2>
+      <p class="lead" data-reveal>Nascida em Brasília e formada em Medicina pela Universidade Federal de Goiás, a Dra. Karinie é dermatologista e idealizou a Vinovare para unir ciência, tecnologia e acolhimento em um só lugar.</p>
+      <p data-reveal>Apaixonada por cuidar da autoestima das pessoas, ela acredita que um bom resultado começa pelo olhar integral: avaliar a saúde como um todo, entender a rotina e as expectativas de cada paciente e construir, juntos, o caminho mais seguro e natural.</p>
+      <blockquote class="quote" data-reveal>
+        <p>“Nosso exterior é reflexo do nosso interior.”</p>
+      </blockquote>
+      <div class="about__sign" data-reveal>{% include 'svg/signature.svg' %}</div>
+      <ul class="creds" data-reveal>
+        <li><small>Registro</small><strong>{{ S.CRM }}</strong></li>
+        <li><small>Especialista</small><strong>{{ S.RQE }}</strong></li>
+        <li><small>Atuação</small><strong>Pele · Cabelo · Corpo</strong></li>
+      </ul>
+      <div data-reveal>{{ m.btn(root ~ 'dra-karinie.html', 'Conheça a trajetória', 'outline') }}</div>
+    </div>
+  </div>
+</section>
+
+{# ============================================================ JORNADA #}
+<section class="journey section section--dark" data-journey>
+  <div class="container">
+    <div class="center-head">
+      {{ m.eyebrow('Jornada do paciente', 'eyebrow--light') }}
+      <h2 class="h2" data-split>Como funciona <em>o seu cuidado</em></h2>
+      <p data-reveal>Do primeiro contato ao acompanhamento, cada etapa é pensada para que você se sinta segura, ouvida e bem cuidada.</p>
+    </div>
+    <ol class="journey__steps">
+      {% for t, d in S.JORNADA %}
+      <li class="jstep" style="--i: {{ loop.index0 }}">
+        <div class="jstep__circle">
+          <span class="jstep__dot" aria-hidden="true"></span>
+          <span class="jstep__num">0{{ loop.index }}</span>
+          <h3 class="jstep__title">{{ t }}</h3>
+          <p class="jstep__text">{{ d }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    <div class="center-cta" data-reveal>
+      {{ m.btn(wa(), 'Dar o primeiro passo', 'light', 'whatsapp', 'target="_blank" rel="noopener"') }}
+      <a class="link-arrow link-arrow--light" href="{{ root }}agendamento.html">Ver detalhes do agendamento {{ m.icon('arrow') }}</a>
+    </div>
+  </div>
+</section>
+
+{# ============================================================ QUIZ #}
+<section class="qt section">
+  <div class="container qt__grid">
+    <div class="qt__visual" data-reveal>
+      <div class="qt__media">{{ img('textura-serum', '', 'qt__img', '(max-width: 900px) 92vw, 46vw') }}</div>
+      <span class="qt__float qt__float--1" data-depth="1.2">Rosto</span>
+      <span class="qt__float qt__float--2" data-depth="0.8">Cabelo</span>
+      <span class="qt__float qt__float--3" data-depth="1.5">Corpo</span>
+      <div class="qt__note" data-depth="0.6">
+        <span class="qt__note-ico">{{ m.icon('heart') }}</span>
+        <span><strong>Sem diagnóstico.</strong> Só orientação para você chegar à consulta mais preparada.</span>
+      </div>
+    </div>
+    <div class="qt__copy">
+      {{ m.eyebrow('Experiência interativa') }}
+      <h2 class="h2" data-split>Descubra <em>seu cuidado</em></h2>
+      <p data-reveal>Responda a quatro perguntas rápidas sobre seus interesses e receba conteúdos e tratamentos para conhecer antes da sua avaliação.</p>
+      <p class="qt__q" data-reveal>O que você gostaria de cuidar primeiro?</p>
+      <div class="opts" data-reveal>
+        {% for key, label, ico in [('rosto', 'Rosto', 'leaf'), ('corpo', 'Corpo', 'heart'), ('cabelo', 'Cabelo e couro cabeludo', 'drop'), ('pele', 'Saúde da pele', 'shield')] %}
+        <a class="opt" href="{{ root }}descubra.html?area={{ key }}">
+          <span class="opt__ico">{{ m.icon(ico) }}</span>
+          <span class="opt__label">{{ label }}</span>
+          <span class="opt__arrow">{{ m.icon('arrow') }}</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ============================================================ CLÍNICA #}
+<section class="ct section">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('A clínica') }}
+        <h2 class="h2" data-split>Um espaço pensado <em>para o seu cuidado</em></h2>
+      </div>
+      <div class="split-head__p" data-reveal>
+        <p>Instalações modernas, funcionais e aconchegantes no coração da Asa Sul. Procedimentos avançados realizados no próprio ambiente da clínica, com conforto e segurança.</p>
+        <a class="link-arrow" href="{{ root }}clinica.html">Fazer o tour pela clínica {{ m.icon('arrow') }}</a>
+      </div>
+    </div>
+    <div class="bento">
+      <figure class="bento__item bento__item--a" data-reveal="mask">
+        <div class="bento__media" data-parallax="0.08">{{ img('clinica-recepcao', 'Recepção da clínica com painéis de madeira e luminárias em cobre', '', '(max-width: 900px) 92vw, 60vw') }}</div>
+        <figcaption>Recepção</figcaption>
+      </figure>
+      <figure class="bento__item bento__item--b" data-reveal="mask">
+        <div class="bento__media" data-parallax="0.1">{{ img('clinica-sala-procedimentos', 'Sala de procedimentos', '', '(max-width: 900px) 46vw, 30vw') }}</div>
+        <figcaption>Sala de procedimentos</figcaption>
+      </figure>
+      <figure class="bento__item bento__item--c" data-reveal="mask">
+        <div class="bento__media" data-parallax="0.1">{{ img('clinica-detalhe', 'Detalhe de decoração da clínica', '', '(max-width: 900px) 46vw, 25vw') }}</div>
+        <figcaption>Detalhes</figcaption>
+      </figure>
+      <figure class="bento__item bento__item--d" data-reveal="mask">
+        <div class="bento__media">
+          <video muted loop playsinline autoplay preload="none" poster="{{ root }}assets/video/sala-tratamento-poster.webp" data-lazy-video>
+            <source data-src="{{ root }}assets/video/sala-tratamento.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figcaption>Ambiente de tratamento</figcaption>
+      </figure>
+      <figure class="bento__item bento__item--e" data-reveal="mask">
+        <div class="bento__media" data-parallax="0.1">{{ img('clinica-consultorio', 'Consultório da Dra. Karinie', '', '(max-width: 900px) 92vw, 30vw') }}</div>
+        <figcaption>Consultório</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+{# ============================================================ CONTEÚDOS #}
+<section class="blog-teaser section section--cream">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Conteúdo dermatológico') }}
+        <h2 class="h2" data-split>Informação que <em>cuida</em></h2>
+      </div>
+      <div class="split-head__p" data-reveal>
+        <p>Orientações sobre cuidados com a pele, saúde capilar, prevenção e tratamentos — para você tomar decisões com mais segurança.</p>
+        <a class="link-arrow" href="{{ root }}conteudos.html">Ver todos os conteúdos {{ m.icon('arrow') }}</a>
+      </div>
+    </div>
+    <div class="cards-3">
+      {% for a in ARTIGOS[:3] %}<div data-reveal style="--delay: {{ loop.index0 * 100 }}ms">{{ m.art_card(a) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============================================================ FAQ #}
+<section class="faq-sec section">
+  <div class="container faq-sec__grid">
+    <div class="faq-sec__head">
+      {{ m.eyebrow('Dúvidas frequentes') }}
+      <h2 class="h2" data-split>Perguntas <em>frequentes</em></h2>
+      <p data-reveal>Não encontrou o que procurava? Fale com a nossa equipe — teremos prazer em ajudar.</p>
+      <div data-reveal>{{ m.btn(wa('Olá! Tenho uma dúvida sobre os atendimentos da Vinovare.'), 'Falar com a equipe', 'outline', 'whatsapp', 'target="_blank" rel="noopener"') }}</div>
+    </div>
+    <div data-reveal>{{ m.faq(S.FAQ_GERAL) }}</div>
+  </div>
+</section>
+
+{# ============================================================ VISITA #}
+<section class="visit section">
+  <div class="container visit__grid">
+    <div class="visit__info">
+      {{ m.eyebrow('Localização') }}
+      <h2 class="h2" data-split>Venha nos <em>visitar</em></h2>
+      <ul class="info-list" data-reveal>
+        <li>{{ m.icon('pin') }}<div><strong>{{ S.ENDERECO_LINHA1 }}</strong><span>{{ S.ENDERECO_LINHA2 }}<br>{{ S.ENDERECO_LINHA3 }} · CEP {{ S.CEP }}</span></div></li>
+        <li>{{ m.icon('clock') }}<div><strong>Horários</strong><span>{% for d, h in S.HORARIOS %}{{ d }}: {{ h }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span></div></li>
+        <li>{{ m.icon('whatsapp') }}<div><strong>WhatsApp</strong><span><a href="{{ wa() }}" target="_blank" rel="noopener">{{ S.TELEFONE }}</a></span></div></li>
+      </ul>
+      <div class="btn-row" data-reveal>
+        {{ m.btn(wa(), 'Agendar avaliação', 'dark', 'whatsapp', 'target="_blank" rel="noopener"') }}
+        {{ m.btn(maps_link(), 'Como chegar', 'outline', 'arrow-up', 'target="_blank" rel="noopener"') }}
+      </div>
+    </div>
+    <div class="visit__map" data-reveal="mask">
+      <iframe src="{{ maps_embed() }}" title="Mapa: Vinovare no Centro Médico Júlio Adnet, Asa Sul" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="visit__tag"><span class="visit__tag-mark">{% include 'svg/mark.svg' %}</span><span><strong>Vinovare</strong><small>Asa Sul · Brasília</small></span></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

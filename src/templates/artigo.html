@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<div class="read-progress" aria-hidden="true"><span data-read-progress></span></div>
+<article class="post">
+  <header class="post__head">
+    <div class="container post__head-in">
+      <nav class="crumbs" aria-label="Você está em">
+        <a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span>
+        <a href="{{ root }}conteudos.html">Conteúdos</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{{ a.categoria }}</span>
+      </nav>
+      <p class="acard__meta"><span class="chip chip--sm">{{ a.categoria }}</span><span>{{ a.leitura }} min de leitura</span><span>{{ a.data }}</span></p>
+      <h1 class="post__title" data-split>{{ a.titulo }}</h1>
+      <div class="author" data-reveal>
+        <span class="author__img">{{ img('dra-retrato', '', '', '80px') }}</span>
+        <span><strong>Dra. Karinie Marinho</strong><small>Dermatologista · {{ S.CRM }} · {{ S.RQE }}</small></span>
+      </div>
+    </div>
+  </header>
+  <figure class="container post__hero" data-reveal="mask">
+    <div class="post__hero-in" data-parallax="0.08">{{ img(a.img, a.titulo, '', '(max-width: 1400px) 100vw, 1360px', eager=True) }}</div>
+  </figure>
+  <div class="container post__grid">
+    <aside class="post__aside">
+      <div class="post__sticky">
+        <p class="post__aside-label">Neste artigo</p>
+        <ol class="toc" data-toc></ol>
+        <div class="post__card">
+          <span class="post__card-mark">{% include 'svg/mark.svg' %}</span>
+          <p>Cada pele é única. Quer uma orientação personalizada?</p>
+          {{ m.btn(wa('Olá! Li o artigo "' ~ a.titulo ~ '" e gostaria de agendar uma avaliação.'), 'Agendar', 'dark', 'whatsapp', 'target="_blank" rel="noopener"', 'btn--sm') }}
+        </div>
+      </div>
+    </aside>
+    <div class="prose" data-prose>
+      {{ a.corpo|safe }}
+      <div class="note">
+        <span class="note__ico">{{ m.icon('shield') }}</span>
+        <p>Este conteúdo é informativo e não substitui a consulta médica. Para diagnóstico e indicação de tratamentos, agende uma avaliação.</p>
+      </div>
+      <div class="post__share">
+        <span>Compartilhar:</span>
+        <a href="https://wa.me/?text={{ (a.titulo ~ ' — ' ~ SITE_URL ~ 'conteudos/' ~ a.slug ~ '.html')|urlencode }}" target="_blank" rel="noopener" aria-label="Compartilhar no WhatsApp">{{ m.icon('whatsapp') }}</a>
+        <button type="button" data-copy-link aria-label="Copiar link">Copiar link</button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="section section--cream related">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Continue lendo') }}
+        <h2 class="h2" data-split>Outros <em>conteúdos</em></h2>
+      </div>
+      <a class="link-arrow" href="{{ root }}conteudos.html" data-reveal>Ver todos {{ m.icon('arrow') }}</a>
+    </div>
+    <div class="cards-3">
+      {% for r in relacionados %}<div data-reveal style="--delay: {{ loop.index0 * 100 }}ms">{{ m.art_card(r) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band() }}
+{% endblock %}

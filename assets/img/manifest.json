@@ -1,0 +1,361 @@
+{
+ "rosto-retrato": {
+  "w": 1792,
+  "h": 2400,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "corpo-ombro": {
+  "w": 1792,
+  "h": 2400,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "cabelo-costas": {
+  "w": 1792,
+  "h": 2400,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-recepcao": {
+  "w": 2752,
+  "h": 1536,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-sala-procedimentos": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-consultorio": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "textura-serum": {
+  "w": 2752,
+  "h": 1536,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "colageno-3d": {
+  "w": 2048,
+  "h": 2048,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "peeling-quimico": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "laser-co2": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "labios": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "olhos": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "contorno-perfil": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "ultrassom-microfocado": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "toxina-marcacao": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "pele-hidratada": {
+  "w": 2048,
+  "h": 2048,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "ampola-ativos": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "colo-maos": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "corpo-silhueta": {
+  "w": 1792,
+  "h": 2400,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "pos-parto": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "masculino": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "capilar-tricoscopia": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "capilar-serum": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "pele-uniforme": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "protetor-solar": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "skincare-flatlay": {
+  "w": 2752,
+  "h": 1536,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "rotina-noturna": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-detalhe": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-corredor": {
+  "w": 1792,
+  "h": 2400,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "clinica-sala-dourada": {
+  "w": 2752,
+  "h": 1536,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "maos-creme": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "paciente-consulta": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "laser-lavieen": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "luz-pulsada": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "corpo-textura": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "cabelo-macro": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "capilar-masculino": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "rejuvenescimento": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "seda-fundo": {
+  "w": 2752,
+  "h": 1536,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "contorno-marcacao": {
+  "w": 1856,
+  "h": 2304,
+  "sizes": [
+   800,
+   1600
+  ]
+ },
+ "dra-apresentando": {
+  "w": 2160,
+  "h": 2667,
+  "sizes": [
+   700,
+   1400
+  ]
+ },
+ "dra-ativo": {
+  "w": 2160,
+  "h": 2667,
+  "sizes": [
+   700,
+   1400
+  ]
+ },
+ "dra-retrato": {
+  "w": 2160,
+  "h": 2667,
+  "sizes": [
+   700,
+   1400
+  ]
+ },
+ "dra-fio": {
+  "w": 2160,
+  "h": 2667,
+  "sizes": [
+   700,
+   1400
+  ]
+ },
+ "clinica-real": {
+  "w": 600,
+  "h": 680,
+  "sizes": [
+   600
+  ]
+ }
+}

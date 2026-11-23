@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="nf">
+  <div class="nf__mark" aria-hidden="true">{% include 'svg/mark.svg' %}</div>
+  <div class="container nf__in">
+    {{ m.eyebrow('Erro 404') }}
+    <h1 class="phero__title" data-split>Esta página <em>não foi encontrada</em></h1>
+    <p class="lead" data-reveal>O endereço pode ter mudado ou a página não existe mais. Que tal recomeçar por aqui?</p>
+    <div class="btn-row" data-reveal>
+      {{ m.btn(root ~ 'index.html', 'Voltar ao início', 'dark') }}
+      {{ m.btn(root ~ 'tratamentos.html', 'Ver tratamentos', 'outline') }}
+    </div>
+  </div>
+</section>
+{% endblock %}

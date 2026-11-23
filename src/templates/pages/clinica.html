@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="clin-hero">
+  <div class="clin-hero__media">
+    <video muted loop playsinline autoplay preload="metadata" poster="{{ root }}assets/video/recepcao-tour-poster.webp">
+      <source src="{{ root }}assets/video/recepcao-tour.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="container clin-hero__in">
+    <nav class="crumbs crumbs--light" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">A Clínica</span></nav>
+    {{ m.eyebrow('Tour pela clínica', 'eyebrow--light') }}
+    <h1 class="phero__title" data-split>Um espaço pensado <em>para o seu cuidado</em></h1>
+    <div class="clin-hero__row" data-reveal>
+      <p>Instalações modernas, funcionais e aconchegantes no Centro Médico Júlio Adnet, na Asa Sul — onde segurança e conforto caminham juntos.</p>
+      <button class="link-circle link-circle--light" type="button" data-video="{{ root }}assets/video/recepcao-tour.mp4" data-caption="Recepção da Vinovare — tour pela clínica.">
+        <span class="link-circle__c">{{ m.icon('play') }}</span><span>Assistir ao tour</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="section clin-intro">
+  <div class="container clin-intro__grid">
+    <div>
+      {{ m.eyebrow('A clínica') }}
+      <h2 class="h2" data-split>Idealizada e criada por <em>Karinie Marinho</em></h2>
+    </div>
+    <div class="clin-intro__copy" data-reveal>
+      <p class="lead">A Vinovare conta com instalações modernas, funcionais e aconchegantes, onde diversos procedimentos avançados são realizados no próprio ambiente da clínica.</p>
+      <p class="muted">Cada espaço foi pensado para que você se sinta acolhida desde a chegada: madeira natural, luz suave, tons terrosos e uma atmosfera tranquila — sem abrir mão das mais rígidas exigências sanitárias.</p>
+      <ul class="clin-stats">
+        <li><strong>Asa Sul</strong><span>Centro Médico Júlio Adnet</span></li>
+        <li><strong>1:1</strong><span>Atendimento individual, sem pressa</span></li>
+        <li><strong>+20</strong><span>Tratamentos realizados no local</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tour" data-htour>
+  <div class="tour__sticky">
+    <div class="tour__head container">
+      {{ m.eyebrow('Ambientes') }}
+      <p class="tour__count"><span data-tour-current>01</span> / {{ '%02d' % 6 }}</p>
+    </div>
+    <div class="tour__track" data-tour-track>
+      {% for name, t, d in [
+        ('clinica-recepcao', 'Recepção', 'Um ambiente acolhedor para receber você com calma e privacidade.'),
+        ('clinica-real', 'Nossa recepção', 'Painéis em madeira, luminárias em cobre e a identidade Vinovare.'),
+        ('clinica-consultorio', 'Consultório', 'Onde acontece a avaliação integral — a etapa mais importante do seu cuidado.'),
+        ('clinica-sala-procedimentos', 'Sala de procedimentos', 'Estrutura completa para procedimentos injetáveis e tecnologias.'),
+        ('clinica-corredor', 'Circulação', 'Espaços amplos, iluminação suave e acabamentos naturais.'),
+        ('clinica-detalhe', 'Detalhes', 'Cada elemento foi escolhido para transmitir tranquilidade e cuidado.'),
+      ] %}
+      <figure class="tour__slide">
+        <a class="tour__media" href="{{ img_url(name) }}" data-lightbox="tour" data-caption="{{ t }}" data-full="{{ img_url(name) }}" data-cursor="Ampliar">
+          {{ img(name, t ~ ' da Vinovare', '', '(max-width: 900px) 84vw, 46vw') }}
+        </a>
+        <figcaption>
+          <span class="tour__n">{{ '%02d' % loop.index }}</span>
+          <strong>{{ t }}</strong>
+          <span>{{ d }}</span>
+        </figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    <div class="container"><div class="tour__progress"><span data-tour-progress></span></div></div>
+  </div>
+</section>
+
+<section class="section section--cream comfort">
+  <div class="container">
+    <div class="center-head">
+      {{ m.eyebrow('Conforto e segurança') }}
+      <h2 class="h2" data-split>Tudo pensado para <em>você se sentir bem</em></h2>
+    </div>
+    <div class="comfort__grid">
+      {% for ico, t, d in [
+        ('shield', 'Biossegurança', 'Clínica dentro das mais rígidas exigências sanitárias, com materiais descartáveis e esterilizados.'),
+        ('tech', 'Tecnologia própria', 'Lasers, ultrassom microfocado e equipamentos de última geração no próprio ambiente.'),
+        ('sofa', 'Ambiente acolhedor', 'Espaços aconchegantes, climatizados e reservados para o seu conforto.'),
+        ('crm', 'Atendimento médico', 'Procedimentos realizados pela própria Dra. Karinie, dermatologista com CRM e RQE.'),
+        ('plan', 'Protocolos individuais', 'Cada etapa é registrada e acompanhada, com retornos programados.'),
+        ('pin', 'Localização central', 'No Centro Médico Júlio Adnet, SEPS 709/909, Asa Sul, Brasília.'),
+      ] %}
+      <div class="comfort__item" data-reveal style="--delay: {{ (loop.index0 % 3) * 100 }}ms">
+        <span class="comfort__ico">{{ m.icon(ico) }}</span>
+        <h3>{{ t }}</h3>
+        <p>{{ d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section clin-video">
+  <div class="container clin-video__grid">
+    <div class="clin-video__copy">
+      {{ m.eyebrow('Ambiente de tratamento') }}
+      <h2 class="h2" data-split>Luz natural, calma e <em>precisão</em></h2>
+      <p class="muted" data-reveal>As salas de procedimento combinam conforto e tecnologia: um ambiente sereno para você relaxar, com toda a estrutura necessária para tratamentos seguros.</p>
+      <div data-reveal>{{ m.btn(root ~ 'tratamentos.html', 'Conhecer os tratamentos', 'outline') }}</div>
+    </div>
+    <button class="video-card video-card--light" type="button" data-video="{{ root }}assets/video/sala-tratamento.mp4" data-caption="Sala de tratamento da Vinovare." data-cursor="Assistir" data-reveal="mask">
+      <video muted loop playsinline autoplay preload="none" poster="{{ root }}assets/video/sala-tratamento-poster.webp">
+        <source data-src="{{ root }}assets/video/sala-tratamento.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__overlay">
+        <span class="video-card__play">{{ m.icon('play') }}</span>
+        <span class="video-card__txt"><small>Vídeo</small><strong>Sala de tratamento</strong></span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<section class="section galeria">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Galeria') }}
+        <h2 class="h2" data-split>Detalhes que <em>fazem diferença</em></h2>
+      </div>
+      <p class="split-head__p" data-reveal>Clique nas imagens para ampliar.</p>
+    </div>
+    <div class="masonry">
+      {% for name, cap in [
+        ('clinica-sala-dourada', 'Sala de tratamento'), ('clinica-detalhe', 'Detalhes de decoração'),
+        ('paciente-consulta', 'Momento de consulta'), ('clinica-recepcao', 'Recepção'),
+        ('laser-lavieen', 'Tecnologia a laser'), ('clinica-consultorio', 'Consultório'),
+        ('textura-serum', 'Ativos e texturas'), ('clinica-corredor', 'Circulação'),
+      ] %}
+      <a class="masonry__item" href="{{ img_url(name) }}" data-lightbox="galeria" data-caption="{{ cap }}" data-full="{{ img_url(name) }}" data-cursor="Ampliar" data-reveal style="--delay: {{ (loop.index0 % 3) * 90 }}ms">
+        {{ img(name, cap, '', '(max-width: 640px) 92vw, 32vw') }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band('Venha conhecer <em>a Vinovare</em>', 'Agende sua avaliação e conheça pessoalmente um espaço pensado para cuidar de você com segurança, conforto e atenção a cada detalhe.') }}
+{% endblock %}

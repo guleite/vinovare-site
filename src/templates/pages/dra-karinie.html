@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="dra-hero">
+  <div class="dra-hero__word" aria-hidden="true">Karinie</div>
+  <div class="container dra-hero__grid">
+    <div class="dra-hero__copy">
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">A Dra. Karinie</span></nav>
+      {{ m.eyebrow('A especialista') }}
+      <h1 class="phero__title" data-split>Dra. Karinie <em>Marinho</em></h1>
+      <p class="dra-hero__role" data-reveal>Médica dermatologista · {{ S.CRM }} · {{ S.RQE }}</p>
+      <p class="lead" data-reveal>Fundadora da Vinovare Medicina Personalizada, a Dra. Karinie acredita que cuidar da pele é cuidar da saúde como um todo — com escuta, ciência e naturalidade.</p>
+      <div class="btn-row" data-reveal>
+        {{ m.btn(wa(), 'Agendar com a Dra. Karinie', 'dark', 'whatsapp', 'target="_blank" rel="noopener"') }}
+        <button class="link-circle" type="button" data-video="{{ root }}assets/video/sala-tratamento.mp4" data-caption="Prévia — espaço reservado para o vídeo de apresentação da Dra. Karinie sobre a sua filosofia de atendimento.">
+          <span class="link-circle__c">{{ m.icon('play') }}</span><span>Filosofia de atendimento</span>
+        </button>
+      </div>
+    </div>
+    <div class="dra-hero__visual" data-hero-visual>
+      <div class="dra-hero__arch" aria-hidden="true"></div>
+      <svg class="hero__ring dra-hero__ring" viewBox="0 0 500 500" aria-hidden="true"><path d="M250 15a235 235 0 1 1-166 69" /></svg>
+      <div class="dra-hero__img" data-depth="0.5">{{ img('dra-ativo', 'Dra. Karinie Marinho segurando um frasco de ativo dermatológico', '', '(max-width: 900px) 92vw, 44vw', eager=True) }}</div>
+      <div class="dra-hero__sign" data-depth="1.3">{% include 'svg/signature.svg' %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section dra-quote">
+  <div class="container">
+    <span class="dra-quote__q" aria-hidden="true">“</span>
+    <p class="manifesto__text" data-words>Amo cuidar da autoestima das pessoas. E, para melhorá-la, é preciso um olhar integral: avaliar a saúde como um todo, porque nosso exterior é reflexo do nosso interior.</p>
+    <p class="dra-quote__by" data-reveal>— Dra. Karinie Marinho</p>
+  </div>
+</section>
+
+<section class="section section--cream trajetoria" data-timeline>
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Trajetória') }}
+        <h2 class="h2" data-split>Uma história de <em>cuidado</em></h2>
+      </div>
+      <p class="split-head__p" data-reveal>Da formação em Goiânia ao consultório na Asa Sul, uma trajetória construída com rigor técnico, ética e paixão pela dermatologia.</p>
+    </div>
+    <ol class="timeline">
+      <span class="timeline__line" aria-hidden="true"><span data-timeline-fill></span></span>
+      {% for t, d in [
+        ('Raízes em Brasília', 'Nascida na capital federal, mudou-se ainda criança para Goiânia, onde cresceu e descobriu a vocação para a Medicina.'),
+        ('Medicina pela UFG', 'Graduou-se em Medicina pela Universidade Federal de Goiás, uma das instituições de referência do Centro-Oeste.'),
+        ('Dermatologia', 'Especializou-se em Dermatologia, com Registro de Qualificação de Especialista — ' ~ S.RQE ~ '.'),
+        ('Perícia médica', 'Atua também como médica perita da Polícia Civil, experiência que reforça o rigor técnico e o compromisso ético.'),
+        ('Vinovare', 'De volta a Brasília, idealizou e fundou a Vinovare Medicina Personalizada, na Asa Sul.'),
+      ] %}
+      <li class="timeline__item" data-reveal style="--delay: {{ loop.index0 * 120 }}ms">
+        <span class="timeline__dot" aria-hidden="true"></span>
+        <span class="timeline__n">0{{ loop.index }}</span>
+        <h3 class="timeline__title">{{ t }}</h3>
+        <p>{{ d }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section qualif">
+  <div class="container qualif__grid">
+    <div class="qualif__visual" data-reveal>
+      <div class="qualif__arch">{{ img('dra-fio', 'Dra. Karinie Marinho apresentando um fio de PDO', '', '(max-width: 900px) 90vw, 38vw') }}</div>
+      <div class="badge-rotate" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="badge-rotate__txt">
+          <defs><path id="circ-dra" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circ-dra">CRM/DF 19437 · RQE 20108 · DERMATOLOGIA ·</textPath></text>
+        </svg>
+        <span class="badge-rotate__mark">{% include 'svg/mark.svg' %}</span>
+      </div>
+    </div>
+    <div>
+      {{ m.eyebrow('Formação e qualificações') }}
+      <h2 class="h2" data-split>Conhecimento a serviço <em>da sua pele</em></h2>
+      <div class="qcards">
+        {% for k, v, d in [
+          ('Formação', 'Medicina — UFG', 'Graduação pela Universidade Federal de Goiás.'),
+          ('Especialidade', 'Dermatologia', 'Registro de Qualificação de Especialista ' ~ S.RQE ~ '.'),
+          ('Registro profissional', S.CRM, 'Conselho Regional de Medicina do Distrito Federal.'),
+          ('Áreas de atuação', 'Pele, cabelo e corpo', 'Dermatologia estética, medicina capilar e procedimentos faciais e corporais.'),
+          ('Experiência pericial', 'Polícia Civil', 'Médica perita, com olhar técnico, criterioso e ético.'),
+          ('Responsável técnica', 'Vinovare', 'Todos os procedimentos estéticos são realizados por ela.'),
+        ] %}
+        <div class="qcard" data-reveal style="--delay: {{ loop.index0 * 70 }}ms">
+          <small>{{ k }}</small>
+          <strong>{{ v }}</strong>
+          <p>{{ d }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark filosofia">
+  <div class="container">
+    <div class="center-head">
+      {{ m.eyebrow('Filosofia de atendimento', 'eyebrow--light') }}
+      <h2 class="h2" data-split>Três princípios que <em>guiam cada consulta</em></h2>
+    </div>
+    <div class="pillars">
+      {% for ico, t, d in [
+        ('heart', 'Olhar integral', 'Antes de qualquer procedimento, uma avaliação da saúde como um todo: histórico, hábitos, rotina, exames e expectativas.'),
+        ('leaf', 'Naturalidade', 'Resultados que respeitam a sua identidade. Rejuvenescer sem perder a expressão — e sem exageros.'),
+        ('shield', 'Ciência e segurança', 'Técnicas com respaldo científico, tecnologias de ponta e protocolos rigorosos de biossegurança.'),
+      ] %}
+      <div class="pillar" data-reveal style="--delay: {{ loop.index0 * 120 }}ms">
+        <span class="pillar__ico">{{ m.icon(ico) }}</span>
+        <span class="pillar__n">0{{ loop.index }}</span>
+        <h3 class="pillar__title">{{ t }}</h3>
+        <p>{{ d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="video-card" type="button" data-video="{{ root }}assets/video/sala-tratamento.mp4" data-caption="Prévia — espaço reservado para o vídeo de apresentação da Dra. Karinie sobre a sua filosofia de atendimento." data-cursor="Assistir" data-reveal="mask">
+      <video muted loop playsinline autoplay preload="none" poster="{{ root }}assets/video/sala-tratamento-poster.webp">
+        <source data-src="{{ root }}assets/video/sala-tratamento.mp4" type="video/mp4">
+      </video>
+      <span class="video-card__overlay">
+        <span class="video-card__play">{{ m.icon('play') }}</span>
+        <span class="video-card__txt"><small>Vídeo</small><strong>Conheça a filosofia da Dra. Karinie</strong></span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<section class="section dra-gallery">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Na prática') }}
+        <h2 class="h2" data-split>Dedicação em <em>cada detalhe</em></h2>
+      </div>
+      <a class="link-arrow" href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener" data-reveal>Acompanhe no Instagram {{ m.icon('arrow-up') }}</a>
+    </div>
+    <div class="dra-gallery__grid">
+      {% for name, cap in [('dra-apresentando', 'Atendimento acolhedor'), ('dra-retrato', 'Dra. Karinie Marinho'), ('dra-ativo', 'Ativos de última geração')] %}
+      <a class="dra-gallery__item" href="{{ img_url(name) }}" data-lightbox="dra" data-caption="{{ cap }}" data-full="{{ img_url(name) }}" data-cursor="Ampliar" data-reveal style="--delay: {{ loop.index0 * 100 }}ms">
+        <span class="dra-gallery__bg"></span>
+        {{ img(name, cap, '', '(max-width: 640px) 92vw, 30vw') }}
+        <span class="tag-float">{{ cap }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band('Agende sua consulta com a <em>Dra. Karinie</em>') }}
+{% endblock %}

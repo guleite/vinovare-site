@@ -1,0 +1,91 @@
+{% macro icon(name, cls='') -%}
+<svg class="i {{ cls }}" aria-hidden="true" focusable="false"><use href="#i-{{ name }}"></use></svg>
+{%- endmacro %}
+
+{% macro btn(href, label, variant='dark', ico='arrow', attrs='', cls='') -%}
+<a class="btn btn--{{ variant }} {{ cls }}" href="{{ href }}" {{ attrs|safe }} data-magnetic>
+  <span class="btn__label">{{ label }}</span>
+  {% if ico %}<span class="btn__ico">{{ icon(ico) }}</span>{% endif %}
+</a>
+{%- endmacro %}
+
+{% macro eyebrow(text, cls='') -%}
+<p class="eyebrow {{ cls }}"><span class="eyebrow__mark"></span>{{ text }}</p>
+{%- endmacro %}
+
+{% macro area_label(p) -%}
+{% for a in p.areas %}{{ AREAS[a].nome }}{% if not loop.last %} · {% endif %}{% endfor %}
+{%- endmacro %}
+
+{% macro proc_card(p, cls='', sizes='(max-width: 700px) 85vw, 360px') -%}
+<article class="pcard {{ cls }}" data-areas="{{ p.areas|join(' ') }}" data-name="{{ p.nome|lower }} {{ p.curto|lower }} {{ p.tecnologias|join(' ')|lower }}">
+  <a class="pcard__link" href="{{ root }}procedimentos/{{ p.slug }}.html" data-cursor="Ver">
+    <div class="pcard__media">
+      {{ img(p.img, p.nome, 'pcard__img', sizes) }}
+      <span class="pcard__tag">{{ area_label(p) }}</span>
+    </div>
+    <div class="pcard__body">
+      <p class="pcard__type">{{ p.tipo }}</p>
+      <h3 class="pcard__title">{{ p.nome }}</h3>
+      <p class="pcard__text">{{ p.curto }}</p>
+      <span class="pcard__more">Saiba mais {{ icon('arrow') }}</span>
+    </div>
+  </a>
+</article>
+{%- endmacro %}
+
+{% macro art_card(a, cls='', sizes='(max-width: 700px) 92vw, 33vw') -%}
+<article class="acard {{ cls }}" data-cat="{{ a.categoria }}">
+  <a class="acard__link" href="{{ root }}conteudos/{{ a.slug }}.html" data-cursor="Ler">
+    <div class="acard__media">{{ img(a.img, '', 'acard__img', sizes) }}</div>
+    <div class="acard__body">
+      <p class="acard__meta"><span class="chip chip--sm">{{ a.categoria }}</span><span>{{ a.leitura }} min de leitura</span></p>
+      <h3 class="acard__title">{{ a.titulo }}</h3>
+      <p class="acard__text">{{ a.resumo }}</p>
+    </div>
+  </a>
+</article>
+{%- endmacro %}
+
+{% macro faq(items, cls='') -%}
+<div class="faq {{ cls }}">
+  {% for q, a in items %}
+  <details class="faq__item" {% if loop.first %}open{% endif %}>
+    <summary class="faq__q"><span>{{ q }}</span><span class="faq__ico">{{ icon('plus') }}</span></summary>
+    <div class="faq__a"><div class="faq__inner"><p>{{ a }}</p></div></div>
+  </details>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro cta_band(title='Seu cuidado começa <em>por você.</em>', text='Agende uma avaliação com a Dra. Karinie Marinho e receba um plano pensado para a sua pele, o seu cabelo e o seu momento.', msg=None) -%}
+<section class="cta-band">
+  <div class="container cta-band__in">
+    <div class="cta-band__mark" aria-hidden="true">{% include 'svg/mark.svg' %}</div>
+    <div class="cta-band__txt" data-reveal>
+      <h2 class="h2">{{ title|safe }}</h2>
+      <p>{{ text }}</p>
+    </div>
+    <div class="cta-band__actions" data-reveal>
+      {{ btn(wa(msg) if msg else wa(), 'Agendar pelo WhatsApp', 'light', 'whatsapp', 'target="_blank" rel="noopener"') }}
+      <a class="link-arrow link-arrow--light" href="{{ root }}agendamento.html">Solicitar horário online {{ icon('arrow') }}</a>
+    </div>
+  </div>
+</section>
+{%- endmacro %}
+
+{% macro page_hero(eyebrow_text, title, lead='', crumbs=[]) -%}
+<section class="phero">
+  <div class="container">
+    {% if crumbs %}
+    <nav class="crumbs" aria-label="Você está em">
+      <a href="{{ root }}index.html">Início</a>
+      {% for label, href in crumbs %}<span aria-hidden="true">/</span>{% if href %}<a href="{{ href }}">{{ label }}</a>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}{% endfor %}
+    </nav>
+    {% endif %}
+    {{ eyebrow(eyebrow_text) }}
+    <h1 class="phero__title" data-split>{{ title|safe }}</h1>
+    {% if lead %}<p class="phero__lead" data-reveal>{{ lead }}</p>{% endif %}
+  </div>
+</section>
+{%- endmacro %}

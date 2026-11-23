@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="phero phero--split">
+  <div class="container phero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Agendamento</span></nav>
+      {{ m.eyebrow('Agendamento') }}
+      <h1 class="phero__title" data-split>Agende sua <em>avaliação</em></h1>
+    </div>
+    <div class="phero__side" data-reveal>
+      <p class="lead">Escolha como prefere falar com a gente: envie uma mensagem pelo WhatsApp ou selecione um dia e horário de preferência para a nossa equipe confirmar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="book" data-book>
+  <div class="container book__grid">
+    <div class="book__card" data-reveal>
+      <div class="tabs" role="tablist" aria-label="Forma de agendamento">
+        <button class="tabs__btn is-active" type="button" role="tab" aria-selected="true" aria-controls="tab-wa" id="tabbtn-wa" data-tab="wa">{{ m.icon('whatsapp') }} WhatsApp</button>
+        <button class="tabs__btn" type="button" role="tab" aria-selected="false" aria-controls="tab-cal" id="tabbtn-cal" data-tab="cal">{{ m.icon('calendar') }} Agenda online</button>
+        <span class="tabs__ind" aria-hidden="true"></span>
+      </div>
+
+      {# ---------------- WhatsApp #}
+      <form class="tabs__panel bform is-active" id="tab-wa" role="tabpanel" aria-labelledby="tabbtn-wa" data-panel="wa" data-wa-form novalidate>
+        <div class="field">
+          <label for="f-nome">Seu nome</label>
+          <input id="f-nome" name="nome" type="text" autocomplete="given-name" placeholder="Como podemos chamar você?" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="f-area">Área de interesse</label>
+            <select id="f-area" name="area" data-area-select>
+              <option value="">Ainda não sei</option>
+              {% for akey, area in AREAS.items() %}<option value="{{ akey }}">{{ area.nome }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-trat">Tratamento <small>(opcional)</small></label>
+            <select id="f-trat" name="trat" data-trat-select>
+              <option value="">Prefiro avaliar na consulta</option>
+              {% for p in PROCEDIMENTOS %}<option value="{{ p.nome }}" data-areas="{{ p.areas|join(' ') }}">{{ p.nome }}</option>{% endfor %}
+            </select>
+          </div>
+        </div>
+        <fieldset class="field">
+          <legend>Melhor período</legend>
+          <div class="pills">
+            {% for v in ['Manhã', 'Tarde', 'Sábado (mediante agendamento)'] %}
+            <label class="pill"><input type="radio" name="periodo" value="{{ v }}" {{ 'checked' if loop.first }}><span>{{ v }}</span></label>
+            {% endfor %}
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-msg">Mensagem <small>(opcional)</small></label>
+          <textarea id="f-msg" name="msg" rows="3" placeholder="Conte um pouco sobre o que você gostaria de cuidar"></textarea>
+        </div>
+        <button class="btn btn--dark btn--block" type="submit" data-magnetic><span class="btn__label">Continuar no WhatsApp</span><span class="btn__ico">{{ m.icon('whatsapp') }}</span></button>
+        <p class="bform__note">{{ m.icon('shield') }} Nenhum dado é armazenado neste site: a mensagem é aberta diretamente no seu WhatsApp.</p>
+      </form>
+
+      {# ---------------- Agenda online #}
+      <div class="tabs__panel cal" id="tab-cal" role="tabpanel" aria-labelledby="tabbtn-cal" data-panel="cal" hidden>
+        <div class="cal__head">
+          <button class="round-btn" type="button" data-cal-prev aria-label="Mês anterior">{{ m.icon('arrow-left') }}</button>
+          <p class="cal__month" data-cal-month aria-live="polite"></p>
+          <button class="round-btn" type="button" data-cal-next aria-label="Próximo mês">{{ m.icon('arrow') }}</button>
+        </div>
+        <div class="cal__week" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
+        <div class="cal__days" data-cal-days></div>
+        <div class="cal__slots-wrap">
+          <p class="cal__label" data-cal-label>Selecione um dia disponível</p>
+          <div class="cal__slots" data-cal-slots></div>
+        </div>
+        <div class="cal__summary" data-cal-summary hidden>
+          <p><span>Sua solicitação</span><strong data-cal-choice></strong></p>
+          <a class="btn btn--dark btn--block" href="#" target="_blank" rel="noopener" data-cal-send><span class="btn__label">Solicitar este horário</span><span class="btn__ico">{{ m.icon('whatsapp') }}</span></a>
+        </div>
+        <p class="bform__note">{{ m.icon('calendar') }} Horários sujeitos à confirmação da equipe. Esta agenda pode ser integrada ao sistema de agendamento da clínica.</p>
+      </div>
+    </div>
+
+    <aside class="book__aside">
+      <div class="book__steps" data-reveal>
+        <p class="eyebrow"><span class="eyebrow__mark"></span>Como funciona</p>
+        <ol>
+          {% for t, d in S.JORNADA %}
+          <li><span class="book__n">0{{ loop.index }}</span><div><strong>{{ t }}</strong><p>{{ d }}</p></div></li>
+          {% endfor %}
+        </ol>
+      </div>
+      <div class="book__info" data-reveal>
+        <ul class="info-list">
+          <li>{{ m.icon('pin') }}<div><strong>{{ S.ENDERECO_LINHA1 }}</strong><span>{{ S.ENDERECO_LINHA2 }}<br>{{ S.ENDERECO_LINHA3 }}</span></div></li>
+          <li>{{ m.icon('clock') }}<div><strong>Horários</strong><span>{% for d, h in S.HORARIOS %}{{ d }}: {{ h }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span></div></li>
+          <li>{{ m.icon('whatsapp') }}<div><strong>WhatsApp</strong><span><a href="{{ wa() }}" target="_blank" rel="noopener">{{ S.TELEFONE }}</a></span></div></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section faq-sec">
+  <div class="container faq-sec__grid">
+    <div class="faq-sec__head">
+      {{ m.eyebrow('Antes da consulta') }}
+      <h2 class="h2" data-split>Dúvidas sobre o <em>agendamento</em></h2>
+    </div>
+    <div data-reveal>{{ m.faq(S.FAQ_GERAL[:4]) }}</div>
+  </div>
+</section>
+{% endblock %}

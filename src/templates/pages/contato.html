@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="phero phero--split">
+  <div class="container phero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Contato</span></nav>
+      {{ m.eyebrow('Localização e contato') }}
+      <h1 class="phero__title" data-split>Estamos na <em>Asa Sul</em></h1>
+    </div>
+    <div class="phero__side" data-reveal>
+      <p class="lead">Fale com a nossa equipe, tire dúvidas ou agende sua avaliação. Teremos prazer em receber você.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="container">
+    <div class="ccards">
+      <div class="ccard" data-reveal>
+        <span class="ccard__ico">{{ m.icon('pin') }}</span>
+        <small>Endereço</small>
+        <strong>{{ S.ENDERECO_LINHA1 }}</strong>
+        <p>{{ S.ENDERECO_LINHA2 }}<br>{{ S.ENDERECO_LINHA3 }} · CEP {{ S.CEP }}</p>
+        <a class="link-arrow" href="{{ maps_link() }}" target="_blank" rel="noopener">Como chegar {{ m.icon('arrow-up') }}</a>
+      </div>
+      <div class="ccard" data-reveal style="--delay: 90ms">
+        <span class="ccard__ico">{{ m.icon('clock') }}</span>
+        <small>Horários</small>
+        <strong>Segunda a sexta</strong>
+        <p>{% for d, h in S.HORARIOS %}{{ d }}: {{ h }}{% if not loop.last %}<br>{% endif %}{% endfor %}</p>
+      </div>
+      <div class="ccard ccard--dark" data-reveal style="--delay: 180ms">
+        <span class="ccard__ico">{{ m.icon('whatsapp') }}</span>
+        <small>WhatsApp</small>
+        <strong>{{ S.TELEFONE }}</strong>
+        <p>Agendamentos, dúvidas e informações sobre tratamentos.</p>
+        <a class="link-arrow link-arrow--light" href="{{ wa() }}" target="_blank" rel="noopener">Enviar mensagem {{ m.icon('arrow-up') }}</a>
+      </div>
+      <div class="ccard" data-reveal style="--delay: 270ms">
+        <span class="ccard__ico">{{ m.icon('instagram') }}</span>
+        <small>Instagram</small>
+        <strong>@{{ S.INSTAGRAM }}</strong>
+        <p>Dicas de cuidados, bastidores e novidades da clínica.</p>
+        <a class="link-arrow" href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener">Seguir {{ m.icon('arrow-up') }}</a>
+      </div>
+    </div>
+
+    <div class="bigmap" data-reveal="mask">
+      <iframe src="{{ maps_embed() }}" title="Mapa: Vinovare no Centro Médico Júlio Adnet, Asa Sul, Brasília" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="bigmap__card">
+        <span class="visit__tag-mark">{% include 'svg/mark.svg' %}</span>
+        <div>
+          <strong>Vinovare Medicina Personalizada</strong>
+          <p>{{ S.ENDERECO_LINHA1 }} · {{ S.ENDERECO_LINHA2 }}</p>
+          <div class="btn-row">
+            {{ m.btn(maps_link(), 'Abrir no Google Maps', 'dark', 'arrow-up', 'target="_blank" rel="noopener"', 'btn--sm') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tips">
+  <div class="container">
+    <div class="center-head">
+      {{ m.eyebrow('Sua visita') }}
+      <h2 class="h2" data-split>Dicas para a sua <em>primeira consulta</em></h2>
+    </div>
+    <div class="tips__grid">
+      {% for n, t, d in [
+        ('01', 'Traga seus exames', 'Exames recentes e a lista de medicamentos e suplementos que você usa ajudam na avaliação integral.'),
+        ('02', 'Anote suas dúvidas', 'Pense no que mais incomoda e no resultado que você espera. Nenhuma pergunta é pequena demais.'),
+        ('03', 'Venha sem maquiagem', 'Se a avaliação for facial, vir com a pele limpa permite uma análise mais precisa.'),
+      ] %}
+      <div class="tip" data-reveal style="--delay: {{ loop.index0 * 100 }}ms">
+        <span class="tip__n">{{ n }}</span>
+        <h3>{{ t }}</h3>
+        <p>{{ d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream faq-sec">
+  <div class="container faq-sec__grid">
+    <div class="faq-sec__head">
+      {{ m.eyebrow('Dúvidas frequentes') }}
+      <h2 class="h2" data-split>Perguntas <em>frequentes</em></h2>
+      <div data-reveal>{{ m.btn(root ~ 'agendamento.html', 'Agendar avaliação', 'dark') }}</div>
+    </div>
+    <div data-reveal>{{ m.faq(S.FAQ_GERAL) }}</div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% import 'partials/macros.html' as m with context %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ title }} | Vinovare Medicina Personalizada</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#FBF8F4">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Vinovare Medicina Personalizada">
+  <meta property="og:title" content="{{ title }} | Vinovare">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:image" content="{{ SITE_URL }}assets/img/{{ og_img|default('clinica-recepcao') }}-1600.webp">
+  <link rel="icon" href="{{ root }}assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ root }}assets/css/main.css">
+  <link rel="stylesheet" href="{{ root }}assets/css/pages.css">
+  <script>
+    (function(d){d.documentElement.classList.add('js');try{if(sessionStorage.getItem('vv-intro'))d.documentElement.classList.add('intro-seen')}catch(e){}})(document);
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["MedicalClinic", "MedicalBusiness"],
+    "name": "Vinovare Medicina Personalizada",
+    "medicalSpecialty": "Dermatology",
+    "url": "{{ SITE_URL }}",
+    "telephone": "+{{ S.WHATSAPP }}",
+    "image": "{{ SITE_URL }}assets/img/clinica-recepcao-1600.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ S.ENDERECO_LINHA2 }} — {{ S.ENDERECO_LINHA1 }}",
+      "addressLocality": "Brasília",
+      "addressRegion": "DF",
+      "postalCode": "{{ S.CEP }}",
+      "addressCountry": "BR"
+    },
+    "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:30", "closes": "18:00"}],
+    "sameAs": ["{{ S.INSTAGRAM_URL }}"],
+    "founder": {"@type": "Physician", "name": "{{ S.MEDICA_COMPLETO }}", "medicalSpecialty": "Dermatology"}
+  }
+  </script>
+  {% block head %}{% endblock %}
+</head>
+<body class="page-{{ page }} {% block body_class %}{% endblock %}" data-wa="{{ S.WHATSAPP }}" data-root="{{ root }}">
+  {% include 'partials/sprite.html' %}
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="intro" aria-hidden="true">
+    <div class="intro__mark">
+      <svg viewBox="12 6 248 278" class="intro__svg">
+        <polygon class="intro__p1" points="18.1,107.7 18.1,197.5 102.8,278.1 102.8,192.9"/>
+        <polygon class="intro__p2" points="192.6,12.5 192.6,107.7 102.8,193.2 102.8,102.8"/>
+        <path class="intro__arc" d="M102.8,277.3c81.1,0,149.7-66.5,149.7-145.1c0-46.6-22.7-90.6-60.8-117.6"/>
+      </svg>
+      <span class="intro__word">Vinovare</span>
+      <span class="intro__sub">Medicina personalizada</span>
+    </div>
+  </div>
+  <div class="curtain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  {% include 'partials/header.html' %}
+
+  <main id="conteudo">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'partials/footer.html' %}
+
+  <a class="wa-float" href="{{ wa() }}" target="_blank" rel="noopener" aria-label="Agendar pelo WhatsApp" data-cursor="WhatsApp">
+    {{ m.icon('whatsapp') }}
+    <span class="wa-float__tip">Agende pelo WhatsApp</span>
+  </a>
+
+  <div class="modal" data-modal hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Vídeo">
+      <button class="modal__close" type="button" data-modal-close aria-label="Fechar">{{ m.icon('close') }}</button>
+      <div class="modal__body" data-modal-body></div>
+    </div>
+  </div>
+
+  <script src="{{ root }}assets/js/main.js" defer></script>
+  <script src="{{ root }}assets/js/pages.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

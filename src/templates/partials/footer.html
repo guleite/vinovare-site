@@ -1,0 +1,47 @@
+{% import 'partials/macros.html' as m with context %}
+<footer class="ftr">
+  <div class="container">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <a href="{{ root }}index.html" class="ftr__logo" aria-label="Vinovare — página inicial">{% include 'svg/logo-full.svg' %}</a>
+        <p>Clínica de dermatologia e estética na Asa Sul, em Brasília. Saúde da pele, rejuvenescimento e autoestima com
+          avaliação integral e protocolos individualizados.</p>
+        <div class="ftr__social">
+          <a href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener" aria-label="Instagram">{{ m.icon('instagram') }}</a>
+          <a href="{{ wa() }}" target="_blank" rel="noopener" aria-label="WhatsApp">{{ m.icon('whatsapp') }}</a>
+        </div>
+      </div>
+      <div class="ftr__col">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="{{ root }}index.html">Início</a></li>
+          {% for key, label, href in S.NAV %}<li><a href="{{ root }}{{ href }}">{{ label }}</a></li>{% endfor %}
+          <li><a href="{{ root }}agendamento.html">Agendamento</a></li>
+        </ul>
+      </div>
+      <div class="ftr__col">
+        <h3>Tratamentos</h3>
+        <ul>
+          {% for akey, area in AREAS.items() %}<li><a href="{{ root }}tratamentos.html#{{ akey }}">{{ area.nome }}</a></li>{% endfor %}
+          {% for p in procs(['toxina-botulinica', 'bioestimuladores-de-colageno', 'laser-co2-fracionado', 'consulta-capilar']) %}
+          <li><a href="{{ root }}procedimentos/{{ p.slug }}.html">{{ p.nome }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="ftr__col">
+        <h3>Contato</h3>
+        <ul class="ftr__contact">
+          <li>{{ m.icon('pin') }}<span>{{ S.ENDERECO_LINHA1 }}<br>{{ S.ENDERECO_LINHA2 }}<br>{{ S.ENDERECO_LINHA3 }}</span></li>
+          <li>{{ m.icon('clock') }}<span>{% for d, h in S.HORARIOS %}{{ d }}: {{ h }}{% if not loop.last %}<br>{% endif %}{% endfor %}</span></li>
+          <li>{{ m.icon('whatsapp') }}<a href="{{ wa() }}" target="_blank" rel="noopener">{{ S.TELEFONE }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ftr__word" aria-hidden="true"><span data-marquee-word>VINOVARE</span></div>
+  <div class="container ftr__bottom">
+    <p>Responsável técnica: {{ S.MEDICA_COMPLETO }} · {{ S.CRM }} · {{ S.RQE }}</p>
+    <p>Conteúdo informativo. Não substitui a consulta médica. Resultados variam de pessoa para pessoa.</p>
+    <p>© {{ ano }} {{ S.NOME }}</p>
+  </div>
+</footer>

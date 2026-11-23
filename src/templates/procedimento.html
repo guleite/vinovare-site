@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% set msg = 'Olá! Gostaria de agendar uma avaliação sobre ' ~ p.nome ~ ' com a Dra. Karinie Marinho.' %}
+{% block content %}
+<section class="proc-hero">
+  <div class="container proc-hero__grid">
+    <div class="proc-hero__copy">
+      <nav class="crumbs" aria-label="Você está em">
+        <a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span>
+        <a href="{{ root }}tratamentos.html">Tratamentos</a><span aria-hidden="true">/</span>
+        <a href="{{ root }}tratamentos.html#{{ area }}">{{ AREAS[area].nome }}</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{{ p.nome }}</span>
+      </nav>
+      {{ m.eyebrow(p.tipo ~ ' · ' ~ m.area_label(p)) }}
+      <h1 class="proc-hero__title" data-split>{{ p.nome }}</h1>
+      <p class="lead" data-reveal>{{ p.curto }}</p>
+      <div class="btn-row" data-reveal>
+        {{ m.btn(wa(msg), 'Agendar avaliação', 'dark', 'whatsapp', 'target="_blank" rel="noopener"') }}
+        <a class="link-circle" href="#duvidas"><span class="link-circle__c">{{ m.icon('arrow') }}</span><span>Dúvidas frequentes</span></a>
+      </div>
+    </div>
+    <div class="proc-hero__visual">
+      <div class="proc-hero__media" data-reveal="mask">
+        <div class="proc-hero__inner" data-parallax="0.06">{{ img(p.img, p.nome, '', '(max-width: 900px) 92vw, 44vw', eager=True) }}</div>
+      </div>
+      <div class="proc-hero__badge" data-reveal style="--delay: 400ms">
+        <span class="proc-hero__badge-mark">{% include 'svg/mark.svg' %}</span>
+        <span><small>Realizado por</small><strong>Dra. Karinie Marinho</strong></span>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <dl class="facts" data-reveal>
+      {% for label, value in p.fatos %}
+      <div class="facts__item"><dt>{{ label }}</dt><dd>{{ value }}</dd></div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Nesta página" data-subnav>
+  <div class="container subnav__in">
+    <a href="#sobre" class="is-active">Sobre</a>
+    <a href="#indicacoes">Indicações</a>
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#tecnologias">Tecnologias</a>
+    <a href="#duvidas">Dúvidas</a>
+    {{ m.btn(wa(msg), 'Agendar', 'dark', '', 'target="_blank" rel="noopener"', 'btn--sm subnav__cta') }}
+  </div>
+</nav>
+
+<section class="section proc-about" id="sobre">
+  <div class="container proc-about__grid">
+    <div>
+      {{ m.eyebrow('Sobre o tratamento') }}
+      <p class="proc-about__lead" data-reveal>{{ p.lead }}</p>
+    </div>
+    <div id="indicacoes" class="proc-ind" data-reveal>
+      <h2 class="h3">Principais indicações</h2>
+      <ul class="ind-list">
+        {% for it in p.indicacoes %}
+        <li><span class="ind-list__ico">{{ m.icon('check') }}</span>{{ it }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream proc-steps" id="como-funciona">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Passo a passo') }}
+        <h2 class="h2" data-split>Como <em>funciona</em></h2>
+      </div>
+      <p class="split-head__p" data-reveal>Cada etapa é conduzida pela Dra. Karinie, com explicações claras sobre o que esperar antes, durante e depois.</p>
+    </div>
+    <ol class="steps">
+      {% for t, d in p.passos %}
+      <li class="steps__item" data-reveal style="--delay: {{ loop.index0 * 110 }}ms">
+        <span class="steps__num">0{{ loop.index }}</span>
+        <h3 class="steps__title">{{ t }}</h3>
+        <p>{{ d }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    <figure class="proc-band" data-reveal="mask">
+      <div class="proc-band__inner" data-parallax="0.12">{{ img(p.img2, '', '', '100vw') }}</div>
+      <figcaption class="proc-band__cap">
+        <span class="proc-band__mark">{% include 'svg/mark.svg' %}</span>
+        <span>Protocolos individualizados, combinados de acordo com a sua avaliação.</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section proc-tech" id="tecnologias">
+  <div class="container proc-tech__grid">
+    <div>
+      {{ m.eyebrow('Tecnologias e ativos') }}
+      <h2 class="h2" data-split>O que usamos <em>neste cuidado</em></h2>
+    </div>
+    <div data-reveal>
+      <ul class="tech-list">
+        {% for t in p.tecnologias %}
+        <li><span class="tech-list__n">{{ '%02d' % loop.index }}</span><span>{{ t }}</span></li>
+        {% endfor %}
+      </ul>
+      <div class="note">
+        <span class="note__ico">{{ m.icon('shield') }}</span>
+        <p><strong>Informação importante:</strong> o conteúdo desta página é informativo. Indicação, contraindicações, número de sessões e resultados variam de pessoa para pessoa e só podem ser definidos após avaliação médica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark proc-faq" id="duvidas">
+  <div class="container faq-sec__grid">
+    <div class="faq-sec__head">
+      {{ m.eyebrow('Dúvidas frequentes', 'eyebrow--light') }}
+      <h2 class="h2" data-split>Perguntas <em>frequentes</em></h2>
+      <p data-reveal style="color: rgba(251,248,244,.72)">Ficou com alguma dúvida? A equipe da Vinovare responde pelo WhatsApp.</p>
+      <div data-reveal>{{ m.btn(wa('Olá! Tenho uma dúvida sobre ' ~ p.nome ~ '.'), 'Tirar uma dúvida', 'light', 'whatsapp', 'target="_blank" rel="noopener"') }}</div>
+    </div>
+    <div data-reveal>{{ m.faq(p.faq) }}</div>
+  </div>
+</section>
+
+{% if relacionados %}
+<section class="section related">
+  <div class="container">
+    <div class="split-head">
+      <div>
+        {{ m.eyebrow('Combinações') }}
+        <h2 class="h2" data-split>Pode ser <em>combinado com</em></h2>
+      </div>
+      <a class="link-arrow" href="{{ root }}tratamentos.html" data-reveal>Ver todos os tratamentos {{ m.icon('arrow') }}</a>
+    </div>
+    <div class="cards-3">
+      {% for r in relacionados %}<div data-reveal style="--delay: {{ loop.index0 * 100 }}ms">{{ m.proc_card(r, '', '(max-width: 640px) 92vw, 30vw') }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{{ m.cta_band('Vamos conversar sobre <em>' ~ p.nome|e ~ '?</em>', 'Agende sua avaliação com a Dra. Karinie Marinho para saber se este tratamento é indicado para você e como ele pode ser combinado em um plano personalizado.', msg) }}
+{% endblock %}

@@ -1,0 +1,72 @@
+{% import 'partials/macros.html' as m with context %}
+<header class="hdr" data-hdr>
+  <div class="hdr__in container">
+    <a class="hdr__logo" href="{{ root }}index.html" aria-label="Vinovare Medicina Personalizada — página inicial">
+      {% include 'svg/logo.svg' %}
+    </a>
+
+    <nav class="hdr__nav" aria-label="Navegação principal">
+      <ul class="hdr__list">
+        {% for key, label, href in S.NAV %}
+        {% if key == 'tratamentos' %}
+        <li class="hdr__item has-mega">
+          <a class="hdr__link {{ 'is-current' if page == key }}" href="{{ root }}{{ href }}" aria-haspopup="true">{{ label }} {{ m.icon('chevron', 'hdr__chev') }}</a>
+          <div class="mega" role="region" aria-label="Tratamentos">
+            <div class="mega__in container">
+              {% for akey, area in AREAS.items() %}
+              <div class="mega__col">
+                <a class="mega__area" href="{{ root }}tratamentos.html#{{ akey }}">
+                  <span class="mega__thumb">{{ img(area.img, '', '', '120px') }}</span>
+                  <span><strong>{{ area.nome }}</strong><small>{{ por_area(akey)|length }} tratamentos</small></span>
+                </a>
+                <ul>
+                  {% for p in procs(PROTOCOLOS_AREA[akey])[:5] %}
+                  <li><a href="{{ root }}procedimentos/{{ p.slug }}.html">{{ p.nome }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endfor %}
+              <a class="mega__card" href="{{ root }}descubra.html">
+                {{ img('seda-fundo', '', 'mega__card-img', '320px') }}
+                <span class="mega__card-txt">
+                  <small>Experiência interativa</small>
+                  <strong>Descubra seu cuidado</strong>
+                  <span class="link-arrow">Começar {{ m.icon('arrow') }}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        {% else %}
+        <li class="hdr__item"><a class="hdr__link {{ 'is-current' if page == key }}" href="{{ root }}{{ href }}">{{ label }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="hdr__actions">
+      <a class="hdr__icon" href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener" aria-label="Instagram">{{ m.icon('instagram') }}</a>
+      <a class="hdr__icon" href="{{ wa() }}" target="_blank" rel="noopener" aria-label="WhatsApp">{{ m.icon('whatsapp') }}</a>
+      <a class="btn btn--dark btn--sm hdr__cta" href="{{ root }}agendamento.html" data-magnetic><span class="btn__label">Agendar consulta</span></a>
+      <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu" data-burger>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true">
+  <div class="menu__bg" aria-hidden="true">{% include 'svg/mark.svg' %}</div>
+  <nav class="menu__nav" aria-label="Menu">
+    <ol class="menu__list">
+      <li><a href="{{ root }}index.html"><small>00</small>Início</a></li>
+      {% for key, label, href in S.NAV %}
+      <li><a href="{{ root }}{{ href }}" class="{{ 'is-current' if page == key }}"><small>{{ '%02d' % loop.index }}</small>{{ label }}</a></li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <div class="menu__foot">
+    {{ m.btn(root ~ 'agendamento.html', 'Agendar consulta', 'dark') }}
+    <p>{{ S.ENDERECO_LINHA1 }} · {{ S.ENDERECO_LINHA3 }}<br><a href="{{ wa() }}" target="_blank" rel="noopener">{{ S.TELEFONE }}</a> · <a href="{{ S.INSTAGRAM_URL }}" target="_blank" rel="noopener">@{{ S.INSTAGRAM }}</a></p>
+  </div>
+</div>

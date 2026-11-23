@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="phero phero--split">
+  <div class="container phero__grid">
+    <div>
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Tratamentos</span></nav>
+      {{ m.eyebrow('Tratamentos') }}
+      <h1 class="phero__title" data-split>Cuidado sob medida para <em>rosto, corpo e cabelo</em></h1>
+    </div>
+    <div class="phero__side" data-reveal>
+      <p class="lead">Conheça os procedimentos e protocolos da Vinovare. A indicação, a combinação de técnicas e o número de sessões são sempre definidos após a sua avaliação médica.</p>
+      <div class="phero__stats">
+        <div><strong>{{ PROCEDIMENTOS|length }}</strong><span>tratamentos e protocolos</span></div>
+        <div><strong>3</strong><span>áreas de cuidado</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trat" data-trat>
+  <div class="container">
+    <div class="trat__bar">
+      <div class="seg" role="tablist" aria-label="Filtrar por área" data-seg>
+        <button class="seg__btn is-active" type="button" role="tab" aria-selected="true" data-filter="todos">Todos <sup>{{ PROCEDIMENTOS|length }}</sup></button>
+        {% for akey, area in AREAS.items() %}
+        <button class="seg__btn" type="button" role="tab" aria-selected="false" data-filter="{{ akey }}">{{ area.nome }} <sup>{{ por_area(akey)|length }}</sup></button>
+        {% endfor %}
+        <span class="seg__ind" aria-hidden="true"></span>
+      </div>
+      <label class="search">
+        {{ m.icon('search') }}
+        <span class="sr-only">Buscar tratamento</span>
+        <input type="search" placeholder="Buscar tratamento ou tecnologia" data-search autocomplete="off">
+      </label>
+    </div>
+
+    {% for akey, area in AREAS.items() %}
+    <div class="trat-intro" data-intro="{{ akey }}" hidden>
+      <div class="trat-intro__media">{{ img(area.img, '', '', '(max-width: 900px) 92vw, 40vw') }}</div>
+      <div class="trat-intro__copy">
+        <p class="trat-intro__slogan">{{ area.slogan }}</p>
+        <h2 class="h2">{{ area.titulo }}</h2>
+        <p class="muted">{{ area.texto }}</p>
+        <p class="trat-intro__label">Principais protocolos</p>
+        <ul class="trat-intro__list">
+          {% for p in procs(PROTOCOLOS_AREA[akey]) %}
+          <li><a href="{{ root }}procedimentos/{{ p.slug }}.html"><span>{{ p.nome }}</span>{{ m.icon('arrow') }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="trat__grid" data-grid>
+      {% for p in PROCEDIMENTOS %}{{ m.proc_card(p, 'trat__card', '(max-width: 640px) 92vw, (max-width: 1100px) 46vw, 30vw') }}{% endfor %}
+    </div>
+    <div class="trat__empty" data-empty hidden>
+      <p class="h3">Nenhum tratamento encontrado.</p>
+      <p class="muted">Tente outro termo ou fale com a nossa equipe — vamos ajudar você a encontrar o cuidado certo.</p>
+      {{ m.btn(wa('Olá! Gostaria de saber se a Vinovare realiza um tratamento específico.'), 'Perguntar à equipe', 'outline', 'whatsapp', 'target="_blank" rel="noopener"') }}
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream trat-quiz">
+  <div class="container trat-quiz__in">
+    <div class="trat-quiz__mark" aria-hidden="true">{% include 'svg/mark.svg' %}</div>
+    <div>
+      {{ m.eyebrow('Ainda em dúvida?') }}
+      <h2 class="h2" data-split>Descubra por onde <em>começar</em></h2>
+    </div>
+    <div data-reveal>
+      <p class="muted">Responda a quatro perguntas rápidas e receba sugestões de tratamentos e conteúdos para conhecer antes da sua avaliação.</p>
+      {{ m.btn(root ~ 'descubra.html', 'Fazer o questionário', 'dark') }}
+    </div>
+  </div>
+</section>
+
+{{ m.cta_band() }}
+{% endblock %}

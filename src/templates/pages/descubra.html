@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% import 'partials/macros.html' as m with context %}
+{% block content %}
+<section class="quiz" data-quiz>
+  <aside class="quiz__aside" aria-hidden="true">
+    <div class="quiz__slides">
+      {% for name in ['seda-fundo', 'rosto-retrato', 'corpo-ombro', 'cabelo-costas', 'pele-hidratada', 'textura-serum'] %}
+      <div class="quiz__slide {{ 'is-active' if loop.first }}" data-slide="{{ loop.index0 }}">{{ img(name, '', '', '(max-width: 980px) 100vw, 42vw', eager=loop.first) }}</div>
+      {% endfor %}
+    </div>
+    <div class="quiz__aside-txt">
+      <span class="quiz__aside-mark">{% include 'svg/mark.svg' %}</span>
+      <p>Medicina personalizada começa por entender <em>o que importa para você.</em></p>
+    </div>
+  </aside>
+
+  <div class="quiz__main">
+    <div class="quiz__top">
+      <nav class="crumbs" aria-label="Você está em"><a href="{{ root }}index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Descubra seu cuidado</span></nav>
+      <div class="quiz__progress" aria-hidden="true"><span data-quiz-bar></span></div>
+      <p class="quiz__step" data-quiz-step aria-live="polite"></p>
+    </div>
+
+    <div class="quiz__stage" data-quiz-stage>
+      {# Tela inicial (renderizada no HTML para funcionar mesmo sem JS) #}
+      <div class="qscreen is-active" data-screen="intro">
+        {{ m.eyebrow('Experiência interativa') }}
+        <h1 class="qscreen__title">Descubra <em>seu cuidado</em></h1>
+        <p class="qscreen__lead">Quatro perguntas rápidas sobre os seus interesses para apresentar conteúdos e tratamentos que valem a pena conhecer antes da sua avaliação.</p>
+        <ul class="qscreen__notes">
+          <li>{{ m.icon('clock') }} Leva menos de 1 minuto</li>
+          <li>{{ m.icon('heart') }} Sem cadastro</li>
+          <li>{{ m.icon('shield') }} Não é diagnóstico</li>
+        </ul>
+        <button class="btn btn--dark" type="button" data-quiz-start data-magnetic><span class="btn__label">Começar</span><span class="btn__ico">{{ m.icon('arrow') }}</span></button>
+        <noscript><p class="muted" style="margin-top:20px">Para usar o questionário, ative o JavaScript do seu navegador — ou <a href="{{ wa() }}">fale com a nossa equipe pelo WhatsApp</a>.</p></noscript>
+      </div>
+    </div>
+
+    <div class="quiz__foot">
+      <button class="quiz__back" type="button" data-quiz-back hidden>{{ m.icon('arrow-left') }} Voltar</button>
+      <p class="quiz__disclaimer">{{ m.icon('shield') }} Este questionário é apenas informativo e não substitui uma consulta médica. Nenhuma informação é armazenada.</p>
+    </div>
+  </div>
+</section>
+<script id="quiz-data" type="application/json">{{ quiz|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ root }}assets/js/quiz.js" defer></script>{% endblock %}
