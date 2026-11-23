@@ -45,4 +45,4 @@
 </section>
 <script id="quiz-data" type="application/json">{{ quiz|tojson }}</script>
 {% endblock %}
-{% block scripts %}<script src="{{ root }}assets/js/quiz.js" defer></script>{% endblock %}
+{% block scripts %}<script src="{{ root }}assets/js/quiz.js?v={{ v }}" defer></script>{% endblock %}

@@ -10,7 +10,7 @@ templates Jinja2. Pode ser publicado em qualquer hospedagem estática (GitHub Pa
 
 | Página | Arquivo | Destaques |
 | --- | --- | --- |
-| Início | `index.html` | Hero com foto da Dra. + mini-vídeo da clínica, manifesto com palavras que "acendem" na rolagem, navegação interativa por áreas (colunas que revelam a imagem e expandem), carrossel de tratamentos, jornada do paciente, chamada para o questionário, mosaico da clínica, conteúdos, FAQ e mapa |
+| Início | `index.html` | Hero com foto da Dra. + mini-vídeo da clínica, apresentação da Vinovare com diferenciais, navegação interativa por áreas (colunas que revelam a imagem e expandem), carrossel de tratamentos, jornada do paciente, chamada para o questionário, mosaico da clínica, conteúdos, FAQ e mapa |
 | Tratamentos | `tratamentos.html` | Filtro por área (Rosto, Corpo, Cabelo) com indicador animado, busca por tratamento/tecnologia, introdução de cada área |
 | Procedimentos (29) | `procedimentos/*.html` | Página premium por procedimento: dados rápidos, indicações, passo a passo, tecnologias, FAQ, combinações e CTA com mensagem pré-preenchida no WhatsApp |
 | A Dra. Karinie | `dra-karinie.html` | Trajetória em linha do tempo, formação e qualificações, filosofia de atendimento e vídeo |
@@ -51,7 +51,7 @@ Para visualizar localmente: `python -m http.server 8000` e abrir `http://localho
 
 - **Cores:** marfim `#FBF8F4`, creme `#F4ECE3`, cobre do logo `#C87C5C`, pêssego `#EBB393` e cacau `#4A2E22`
   (os tons marrons dos posts do Instagram).
-- **Tipografia:** DM Serif Display (títulos, como nos posts), Montserrat (texto e rótulos espaçados, como no logo)
+- **Tipografia:** Fraunces em peso leve (títulos), Montserrat (texto e rótulos espaçados, como no logo)
   e a assinatura original do logo "By Karinie Marinho" em SVG.
 - **Elementos:** o "V" e o arco do logo aparecem como arcos nas fotos, anéis girando, marcas d'água e ícones.
 - **Movimento:** abertura com o logo se desenhando, títulos revelados palavra a palavra, parallax, cursor

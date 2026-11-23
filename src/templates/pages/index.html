@@ -28,9 +28,6 @@
       <div class="hero__arch" aria-hidden="true">
         <span class="hero__arch-glow"></span>
       </div>
-      <svg class="hero__ring" viewBox="0 0 500 500" aria-hidden="true">
-        <path d="M250 15a235 235 0 1 1-166 69" />
-      </svg>
       <div class="hero__dra" data-depth="0.6">
         {{ img('dra-apresentando', 'Dra. Karinie Marinho, médica dermatologista, apresentando a clínica', 'hero__dra-img', '(max-width: 900px) 92vw, 46vw', eager=True) }}
       </div>
@@ -62,19 +59,27 @@
   </div>
 </div>
 
-{# ============================================================ MANIFESTO #}
-<section class="manifesto section" id="manifesto">
+{# ============================================================ A VINOVARE #}
+<section class="intro-sec section" id="manifesto">
+  <div class="container intro-sec__grid">
+    <div class="intro-sec__copy">
+      {{ m.eyebrow('A Vinovare') }}
+      <h2 class="h2" data-split>Medicina personalizada, <em>do diagnóstico ao cuidado</em></h2>
+      <p class="lead" data-reveal>Idealizada pela Dra. Karinie Marinho, a Vinovare une avaliação médica integral, tecnologia e acolhimento para cuidar da sua pele, do seu cabelo e do seu bem-estar.</p>
+      <p class="intro-sec__p" data-reveal>Cada plano nasce de uma consulta sem pressa: entender a sua história, os seus hábitos e os seus objetivos para indicar apenas o que faz sentido para você — com naturalidade e segurança.</p>
+      <div data-reveal><a class="link-arrow" href="{{ root }}clinica.html">Conheça a clínica {{ m.icon('arrow') }}</a></div>
+    </div>
+    <div class="intro-sec__visual">
+      <div class="intro-sec__media" data-reveal="mask">
+        <div class="intro-sec__img" data-parallax="0.06">{{ img('paciente-consulta', 'Paciente conversando durante a consulta na Vinovare', '', '(max-width: 980px) 92vw, 42vw') }}</div>
+      </div>
+      <div class="intro-sec__tag" data-reveal style="--delay: 300ms">
+        <span class="intro-sec__tag-mark">{% include 'svg/mark.svg' %}</span>
+        <span><strong>Atendimento individual</strong><small>Todos os procedimentos com a Dra. Karinie</small></span>
+      </div>
+    </div>
+  </div>
   <div class="container">
-    {{ m.eyebrow('Medicina personalizada') }}
-    <p class="manifesto__text" data-words>
-      Na Vinovare, todo cuidado começa
-      <span class="pill-img">{{ img('rosto-retrato', '', '', '120px') }}</span>
-      por você: uma avaliação médica integral, tecnologia de ponta
-      <span class="pill-img">{{ img('laser-lavieen', '', '', '120px') }}</span>
-      e um plano feito sob medida para a sua pele, o seu cabelo
-      <span class="pill-img">{{ img('cabelo-macro', '', '', '120px') }}</span>
-      e o seu bem-estar.
-    </p>
     <div class="diffs">
       {% for ico, t, d in S.DIFERENCIAIS %}
       <div class="diff" data-reveal style="--delay: {{ loop.index0 * 90 }}ms">

@@ -10,7 +10,7 @@ estática). Requer: pip install jinja2
 import json
 import os
 import sys
-from datetime import date
+from datetime import date, datetime
 from urllib.parse import quote
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound, pass_context, select_autoescape
@@ -25,6 +25,8 @@ from procedimentos import (AREAS, DESTAQUES, PROCEDIMENTOS, PROTOCOLOS_AREA,  # 
                            POR_SLUG as PROC)
 
 SITE_URL = 'https://vinovare.com.br/'
+# Prévia de apresentação: impede a indexação no Google. Mude para False ao publicar o site oficial.
+NOINDEX = True
 
 with open(os.path.join(ROOT, 'assets', 'img', 'manifest.json'), encoding='utf-8') as f:
     MANIFEST = json.load(f)
@@ -88,7 +90,8 @@ env.globals.update(
     S=S, wa=wa, img=img, img_url=img_url, maps_embed=maps_embed, maps_link=maps_link,
     AREAS=AREAS, PROCEDIMENTOS=PROCEDIMENTOS, PROC=PROC, procs=procs, por_area=por_area,
     DESTAQUES=DESTAQUES, PROTOCOLOS_AREA=PROTOCOLOS_AREA, ARTIGOS=ARTIGOS, ARTIGO=ARTIGO,
-    arts=arts, CATEGORIAS=CATEGORIAS, ano=date.today().year, SITE_URL=SITE_URL,
+    arts=arts, CATEGORIAS=CATEGORIAS, ano=date.today().year, SITE_URL=SITE_URL, NOINDEX=NOINDEX,
+    v=datetime.now().strftime('%Y%m%d%H%M'),  # versão dos arquivos CSS/JS (evita cache antigo)
 )
 
 BUILT = []
@@ -177,7 +180,10 @@ def main():
     with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('\n'.join(sm) + '\n')
     with open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n')
+        if NOINDEX:
+            f.write('User-agent: *\nDisallow: /\n')
+        else:
+            f.write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n')
 
     print(f'{len(BUILT)} páginas geradas.')
 
